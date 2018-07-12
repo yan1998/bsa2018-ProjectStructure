@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using bsa2018_ProjectStructure.DataAccess.Model;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class FlightsRepository : IRepository<Flight>
     {
@@ -15,7 +15,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             this.context = context;
         }
 
-        IEnumerable<Flight> IRepository<Flight>.Get()
+        IEnumerable<Flight> IRepository<Flight>.GetAll()
         {
             return context.Flights.ToList();
         }

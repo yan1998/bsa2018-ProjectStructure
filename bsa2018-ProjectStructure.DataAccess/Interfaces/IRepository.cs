@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using bsa2018_ProjectStructure.DataAccess.Model;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public interface  IRepository<TEntity> where TEntity : Entity
     {
-        IEnumerable<TEntity> Get();
+        IEnumerable<TEntity> GetAll();
 
         TEntity GetById(int id);
 

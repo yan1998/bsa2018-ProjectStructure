@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class CrewsRepository : IRepository<Crew>
     {
@@ -26,7 +26,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             context.Crews.Remove(GetById(id));
         }
 
-        public IEnumerable<Crew> Get()
+        public IEnumerable<Crew> GetAll()
         {
             return context.Crews.ToList();
         }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class AircraftTypesRepository : IRepository<AircraftType>
     {
@@ -32,7 +32,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             context.AircraftTypes.Remove(aircraftType);
         }
 
-        public IEnumerable<AircraftType> Get()
+        public IEnumerable<AircraftType> GetAll()
         {
             return context.AircraftTypes.ToList();
         }

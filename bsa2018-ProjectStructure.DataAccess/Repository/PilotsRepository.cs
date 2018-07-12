@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class PilotsRepository : IRepository<Pilot>
     {
@@ -33,7 +33,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             context.Pilots.Remove(pilot);
         }
 
-        public IEnumerable<Pilot> Get()
+        public IEnumerable<Pilot> GetAll()
         {
             return context.Pilots.ToList();
         }

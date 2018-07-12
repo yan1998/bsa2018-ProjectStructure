@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class StewardessRepository : IRepository<Stewardess>
     {
@@ -30,7 +30,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             context.Stewardess.Remove(stewardess);
         }
 
-        public IEnumerable<Stewardess> Get()
+        public IEnumerable<Stewardess> GetAll()
         {
             return context.Stewardess.ToList();
         }

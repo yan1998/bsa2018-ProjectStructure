@@ -2,7 +2,7 @@
 using System.Linq;
 using bsa2018_ProjectStructure.DataAccess.Model;
 
-namespace bsa2018_ProjectStructure.DataAccess.Repository
+namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
     public class DeparturesRepository : IRepository<Departure>
     {
@@ -34,7 +34,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Repository
             context.Departures.Remove(departure);
         }
 
-        public IEnumerable<Departure> Get()
+        public IEnumerable<Departure> GetAll()
         {
             return context.Departures.ToList();
         }
