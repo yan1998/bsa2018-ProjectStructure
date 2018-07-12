@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace bsa2018_ProjectStructure.DataAccess.Model
 {
-    public class Flight
+    public class Flight:Entity
     {
-        public int Number { get; set; }
         public string DeparturePlace { get; set; }
         public DateTime DepartureTime{ get; set; }
         public string Destination { get; set; }

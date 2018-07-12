@@ -2,9 +2,8 @@
 
 namespace bsa2018_ProjectStructure.DataAccess.Model
 {
-    public class Aircraft
+    public class Aircraft:Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
         public TimeSpan LifeSpan { get; set; }

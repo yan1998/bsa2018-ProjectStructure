@@ -2,10 +2,8 @@
 
 namespace bsa2018_ProjectStructure.DataAccess.Model
 {
-    public class Crew
+    public class Crew:Entity
     {
-        public int Id { get; set; }
-
         public int IdPilot { get; set; }
         public Pilot Pilot { get; set; }
 
