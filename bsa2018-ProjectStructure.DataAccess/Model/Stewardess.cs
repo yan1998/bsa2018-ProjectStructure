@@ -8,7 +8,5 @@ namespace bsa2018_ProjectStructure.DataAccess.Model
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime Birthday { get; set; }
-
-        public List<Crew> Crews { get; set; }
     }
 }
