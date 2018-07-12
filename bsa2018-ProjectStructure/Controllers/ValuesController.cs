@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using bsa2018_ProjectStructure.DataAccess.Repository;
+using bsa2018_ProjectStructure.DataAccess.Model;
 
 namespace bsa2018_ProjectStructure.Controllers
 {
@@ -13,6 +15,8 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            PilotsRepository tickets = new PilotsRepository(new DataContext());
+            tickets.Delete(1);
             return new string[] { "value1", "value2" };
         }
 

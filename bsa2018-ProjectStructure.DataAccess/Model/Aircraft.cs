@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace bsa2018_ProjectStructure.DataAccess.Model
 {
@@ -10,5 +11,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Model
 
         public int IdAircraftType { get; set; }
         public AircraftType AircraftType { get; set; }
+
+        public List<Departure> Departures { get; set; }
     }
 }

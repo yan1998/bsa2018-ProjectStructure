@@ -135,21 +135,21 @@ namespace bsa2018_ProjectStructure.DataAccess.Model
                 Id = 1,
                 IdPilot = pilot1.Id,
                 Pilot = pilot1,
-                IdStewardess = new int[] { 1, 2 },
+                Stewardess = new List<Stewardess> { stewardess1, stewardess2 },
             };
             Crew crew2 = new Crew
             {
                 Id = 2,
                 IdPilot = pilot2.Id,
                 Pilot = pilot2,
-                IdStewardess = new int[] { 1, 3 }
+                Stewardess = new List<Stewardess> { stewardess1, stewardess3 }
             };
             Crew crew3 = new Crew
             {
                 Id = 3,
                 IdPilot = pilot2.Id,
                 Pilot = pilot2,
-                IdStewardess = new int[] { 2, 3 }
+                Stewardess = new List<Stewardess> { stewardess2, stewardess3 }
             };
             this.Crews = new List<Crew> { crew1, crew2, crew3 };
             #endregion
