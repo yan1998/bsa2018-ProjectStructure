@@ -5,7 +5,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Model
     {
         public float Cost { get; set; }
 
-        public int FlightNumber { get; set; }
+        public int IdFlight { get; set; }
         public Flight Flight { get; set; }
     }
 }

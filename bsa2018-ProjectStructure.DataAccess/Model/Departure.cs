@@ -4,8 +4,10 @@ namespace bsa2018_ProjectStructure.DataAccess.Model
 {
     public class Departure:Entity
     {
-        public int FlightNumber { get; set; }
         public DateTime DepartureTime { get; set; }
+
+        public int IdFlight { get; set; }
+        public Flight Flight { get; set; }
 
         public int IdCrew { get; set; }
         public Crew Crew { get; set; }
