@@ -5,7 +5,7 @@ namespace bsa2018_ProjectStructure.BLL.Interfaces
 {
     public interface IAircraftService
     {
-        AircraftDTO AddAircraft(AircraftDTO flight);
+        AircraftDTO AddAircraft(AircraftDTO aircraft);
         List<AircraftDTO> GetAllAircrafts();
         AircraftDTO GetAircraft(int id);
         AircraftDTO UpdateAircraft(int id, AircraftDTO aircraft);
