@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
   </ItemGroup>
 
@@ -17,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\bsa2018-ProjectStructure.BLL\bsa2018-ProjectStructure.BLL.csproj" />
     <ProjectReference Include="..\bsa2018-ProjectStructure.DataAccess\bsa2018-ProjectStructure.DataAccess.csproj" />
+    <ProjectReference Include="..\bsa2018-ProjectStructure.Shared\bsa2018-ProjectStructure.Shared.csproj" />
   </ItemGroup>
 
 </Project>

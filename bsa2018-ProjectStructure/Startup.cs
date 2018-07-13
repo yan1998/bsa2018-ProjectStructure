@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using AutoMapper;
+using bsa2018_ProjectStructure.Shared.DTO;
+using bsa2018_ProjectStructure.DataAccess.Model;
 
 namespace bsa2018_ProjectStructure
 {
