@@ -39,9 +39,13 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.Stewardess.FirstOrDefault(s=>s.Id==id);
         }
 
-        public void Update(Stewardess entity)
+        public Stewardess Update(int id, Stewardess entity)
         {
-
+            Stewardess stewardess = GetById(id);
+            stewardess.Birthday = entity.Birthday;
+            stewardess.Name = entity.Name;
+            stewardess.Surname = entity.Surname;
+            return stewardess;
         }
     }
 }

@@ -40,9 +40,13 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.Tickets.FirstOrDefault(t => t.Id == id);
         }
 
-        public void Update(Ticket entity)
+        public Ticket Update(int id, Ticket entity)
         {
-            
+            Ticket ticket = GetById(id);
+            ticket.Cost = entity.Cost;
+            ticket.IdFlight = entity.IdFlight;
+            ticket.Flight = context.Flights.FirstOrDefault(f => f.Id == entity.IdFlight);
+            return ticket;
         }
     }
 }

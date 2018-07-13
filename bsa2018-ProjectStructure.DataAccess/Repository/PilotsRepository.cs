@@ -42,9 +42,14 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.Pilots.FirstOrDefault(s => s.Id == id);
         }
 
-        public void Update(Pilot entity)
+        public Pilot Update(int id, Pilot entity)
         {
-            
+            Pilot pilot = GetById(id);
+            pilot.Birthday = entity.Birthday;
+            pilot.Experience = entity.Experience;
+            pilot.Name = entity.Name;
+            pilot.Surname = entity.Surname;
+            return pilot;
         }
     }
 }

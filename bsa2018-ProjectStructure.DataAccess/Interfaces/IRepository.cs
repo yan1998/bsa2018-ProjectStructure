@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using bsa2018_ProjectStructure.DataAccess.Model;
 
 namespace bsa2018_ProjectStructure.DataAccess.Interfaces
@@ -13,7 +11,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 
         TEntity Create(TEntity entity);
 
-        void Update(TEntity entity);
+        TEntity Update(int id, TEntity entity);
 
         void Delete(int id);
     }

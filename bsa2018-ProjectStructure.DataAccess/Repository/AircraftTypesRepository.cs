@@ -42,9 +42,12 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.AircraftTypes.FirstOrDefault(c => c.Id == id);
         }
 
-        public void Update(AircraftType entity)
+        public AircraftType Update(int id, AircraftType entity)
         {
-           
+            AircraftType aircraftType = GetById(id);
+            aircraftType.LoadCapacity = entity.LoadCapacity;
+            aircraftType.Places = entity.Places;
+            return aircraftType;
         }
     }
 }

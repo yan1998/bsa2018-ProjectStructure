@@ -40,9 +40,14 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             context.Flights.Remove(flight);
         }
 
-        public void Update(Flight entity)
+        public Flight Update(int id, Flight entity)
         {
-
+            Flight flight = GetById(id);
+            flight.ArrivalTime = entity.ArrivalTime;
+            flight.DeparturePlace = entity.DeparturePlace;
+            flight.DepartureTime = entity.DepartureTime;
+            flight.Destination = entity.Destination;
+            return flight;
         }
     }
 }

@@ -45,9 +45,17 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.Departures.FirstOrDefault(d => d.Id == id);
         }
 
-        public void Update(Departure entity)
+        public Departure Update(int id, Departure entity)
         {
-    
+            Departure departure = GetById(id);
+            departure.DepartureTime = entity.DepartureTime;
+            departure.IdAircraft = entity.IdAircraft;
+            departure.Aircraft = context.Aicrafts.FirstOrDefault(a => a.Id == entity.IdAircraft);
+            departure.IdCrew = entity.IdCrew;
+            departure.Crew = context.Crews.FirstOrDefault(c => c.Id == entity.IdCrew);
+            departure.IdFlight = entity.IdFlight;
+            departure.Flight = context.Flights.FirstOrDefault(f => f.Id == entity.IdFlight);
+            return departure;
         }
     }
 }

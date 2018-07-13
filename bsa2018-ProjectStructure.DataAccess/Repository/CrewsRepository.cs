@@ -35,9 +35,13 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             return context.Crews.FirstOrDefault(c => c.Id == id);
         }
 
-        public void Update(Crew entity)
+        public Crew Update(int id, Crew entity)
         {
-           
+            Crew crew = GetById(id);
+            crew.IdPilot = entity.IdPilot;
+            crew.Pilot = context.Pilots.FirstOrDefault(p => p.Id == entity.IdPilot);
+            crew.idStewardess = entity.idStewardess;
+            return crew;
         }
     }
 }
