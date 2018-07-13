@@ -5,6 +5,8 @@ using bsa2018_ProjectStructure.Shared.DTO;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using AutoMapper;
 using bsa2018_ProjectStructure.DataAccess.Model;
+using bsa2018_ProjectStructure.BLL.Validators;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -12,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly FlightValidator validator;
 
         public FlightService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new FlightValidator();
         }
 
         public FlightDTO AddFlight(FlightDTO flight)
         {
+            Validation(flight);
             Flight modelFlight = mapper.Map<FlightDTO, Flight>(flight);
             return mapper.Map<Flight,FlightDTO>(unitOfWork.Flights.Create(modelFlight));
         }
@@ -53,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(flight);
                 Flight modelFlight = mapper.Map<FlightDTO, Flight>(flight);
                 Flight result = unitOfWork.Flights.Update(id, modelFlight);
                 return mapper.Map<Flight, FlightDTO>(result);
@@ -61,6 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             }
+        }
+
+        private void Validation(FlightDTO flight)
+        {
+            var validationResult = validator.Validate(flight);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }

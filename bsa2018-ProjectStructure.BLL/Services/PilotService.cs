@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using bsa2018_ProjectStructure.BLL.Interfaces;
+using bsa2018_ProjectStructure.BLL.Validators;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using bsa2018_ProjectStructure.DataAccess.Model;
 using bsa2018_ProjectStructure.Shared.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -12,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly PilotValidator validator;
 
         public PilotService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new PilotValidator();
         }
 
         public PilotDTO AddPilot(PilotDTO pilot)
         {
+            Validation(pilot);
             Pilot modelPilot = mapper.Map<PilotDTO, Pilot>(pilot);
             return mapper.Map<Pilot, PilotDTO>(unitOfWork.Pilots.Create(modelPilot));
         }
@@ -53,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(pilot);
                 Pilot modelPilot = mapper.Map<PilotDTO, Pilot>(pilot);
                 Pilot result = unitOfWork.Pilots.Update(id, modelPilot);
                 return mapper.Map<Pilot, PilotDTO>(result);
@@ -61,6 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             }
+        }
+
+        private void Validation(PilotDTO pilot)
+        {
+            var validationResult = validator.Validate(pilot);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using bsa2018_ProjectStructure.BLL.Interfaces;
+using bsa2018_ProjectStructure.BLL.Validators;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using bsa2018_ProjectStructure.DataAccess.Model;
 using bsa2018_ProjectStructure.Shared.DTO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -11,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly AircraftValidator validator;
 
         public AircraftService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new AircraftValidator();
         }
 
         public AircraftDTO AddAircraft(AircraftDTO aircraft)
         {
+            Validation(aircraft);
             Aircraft modelAircraft = mapper.Map<AircraftDTO, Aircraft>(aircraft);
             return mapper.Map<Aircraft, AircraftDTO>(unitOfWork.Aircrafts.Create(modelAircraft));
         }
@@ -52,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(aircraft);
                 Aircraft modelAircraft = mapper.Map<AircraftDTO, Aircraft>(aircraft);
                 Aircraft result = unitOfWork.Aircrafts.Update(id, modelAircraft);
                 return mapper.Map<Aircraft, AircraftDTO>(result);
@@ -60,7 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             }
+        }
 
+        private void Validation(AircraftDTO aircraft)
+        {
+            var validationResult = validator.Validate(aircraft);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }

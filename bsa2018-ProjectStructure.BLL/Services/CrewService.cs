@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using bsa2018_ProjectStructure.BLL.Interfaces;
+using bsa2018_ProjectStructure.BLL.Validators;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using bsa2018_ProjectStructure.DataAccess.Model;
 using bsa2018_ProjectStructure.Shared.DTO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -11,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly CrewValidator validator;
 
         public CrewService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new CrewValidator();
         }
 
         public CrewDTO AddCrew(CrewDTO crew)
         {
+            Validation(crew);
             Crew modelCrew = mapper.Map<CrewDTO, Crew>(crew);
             return mapper.Map<Crew, CrewDTO>(unitOfWork.Crews.Create(modelCrew));
         }
@@ -52,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(crew);
                 Crew modelCrew = mapper.Map<CrewDTO, Crew>(crew);
                 Crew result = unitOfWork.Crews.Update(id, modelCrew);
                 return mapper.Map<Crew, CrewDTO>(result);
@@ -60,6 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             }
+        }
+
+        private void Validation(CrewDTO crew)
+        {
+            var validationResult = validator.Validate(crew);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }

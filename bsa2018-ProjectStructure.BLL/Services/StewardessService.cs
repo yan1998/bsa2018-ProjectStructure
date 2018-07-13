@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using bsa2018_ProjectStructure.BLL.Interfaces;
+using bsa2018_ProjectStructure.BLL.Validators;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using bsa2018_ProjectStructure.DataAccess.Model;
 using bsa2018_ProjectStructure.Shared.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -12,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly StewardessValidator validator;
 
         public StewardessService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new StewardessValidator();
         }
 
         public StewardessDTO AddStewardess(StewardessDTO stewardess)
         {
+            Validation(stewardess);
             Stewardess modelStewardess = mapper.Map<StewardessDTO, Stewardess>(stewardess);
             return mapper.Map<Stewardess, StewardessDTO>(unitOfWork.Stewardess.Create(modelStewardess));
         }
@@ -53,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(stewardess);
                 Stewardess modelStewardess = mapper.Map<StewardessDTO, Stewardess>(stewardess);
                 Stewardess result = unitOfWork.Stewardess.Update(id, modelStewardess);
                 return mapper.Map<Stewardess, StewardessDTO>(result);
@@ -61,6 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             } 
+        }
+
+        private void Validation(StewardessDTO stewardess)
+        {
+            var validationResult = validator.Validate(stewardess);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }

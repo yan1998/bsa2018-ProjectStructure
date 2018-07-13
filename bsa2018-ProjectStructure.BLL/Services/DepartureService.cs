@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using bsa2018_ProjectStructure.BLL.Interfaces;
+using bsa2018_ProjectStructure.BLL.Validators;
 using bsa2018_ProjectStructure.DataAccess.Interfaces;
 using bsa2018_ProjectStructure.DataAccess.Model;
 using bsa2018_ProjectStructure.Shared.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bsa2018_ProjectStructure.BLL.Services
 {
@@ -12,15 +14,18 @@ namespace bsa2018_ProjectStructure.BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly DepartureValidator validator;
 
         public DepartureService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            validator = new DepartureValidator();
         }
 
         public DepartureDTO AddDeparture(DepartureDTO departure)
         {
+            Validation(departure);
             Departure modelDeparture = mapper.Map<DepartureDTO, Departure>(departure);
             return mapper.Map<Departure, DepartureDTO>(unitOfWork.Departures.Create(modelDeparture));
         }
@@ -53,6 +58,7 @@ namespace bsa2018_ProjectStructure.BLL.Services
         {
             try
             {
+                Validation(departure);
                 Departure modelDeparture = mapper.Map<DepartureDTO, Departure>(departure);
                 Departure result = unitOfWork.Departures.Update(id, modelDeparture);
                 return mapper.Map<Departure, DepartureDTO>(result);
@@ -61,6 +67,13 @@ namespace bsa2018_ProjectStructure.BLL.Services
             {
                 throw ex;
             }
+        }
+
+        private void Validation(DepartureDTO departure)
+        {
+            var validationResult = validator.Validate(departure);
+            if (!validationResult.IsValid)
+                throw new Exception(validationResult.Errors.First().ToString());
         }
     }
 }
