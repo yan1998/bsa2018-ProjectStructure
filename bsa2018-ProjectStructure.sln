@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bsa2018-ProjectStructure.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsa2018-ProjectStructure.BLL", "bsa2018-ProjectStructure.BLL\bsa2018-ProjectStructure.BLL.csproj", "{B5296CDA-835F-4172-A0E4-69C54B3F58BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsa2018-ProjectStructure.Shared", "bsa2018-ProjectStructure.Shared\bsa2018-ProjectStructure.Shared.csproj", "{A2BE1945-63E5-4548-AD83-EFEEB521D7DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B5296CDA-835F-4172-A0E4-69C54B3F58BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5296CDA-835F-4172-A0E4-69C54B3F58BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5296CDA-835F-4172-A0E4-69C54B3F58BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BE1945-63E5-4548-AD83-EFEEB521D7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BE1945-63E5-4548-AD83-EFEEB521D7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BE1945-63E5-4548-AD83-EFEEB521D7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BE1945-63E5-4548-AD83-EFEEB521D7DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
