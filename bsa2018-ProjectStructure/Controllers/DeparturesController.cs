@@ -34,7 +34,15 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]DepartureDTO departure)
         {
-            return Json(departureService.AddDeparture(departure));
+            try
+            {
+                return Json(departureService.AddDeparture(departure));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 400;
+                return Json(ex.Message);
+            }
         }
         
         // PUT: api/Departures/5

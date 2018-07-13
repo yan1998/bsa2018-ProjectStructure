@@ -33,7 +33,15 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]AircraftTypeDTO aircraftType)
         {
-            return Json(aircraftTypesService.AddAircraftType(aircraftType));
+            try
+            {
+                return Json(aircraftTypesService.AddAircraftType(aircraftType));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 400;
+                return Json(ex.Message);
+            }
         }
         
         // PUT: api/AircraftTypes/5

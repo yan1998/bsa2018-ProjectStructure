@@ -33,7 +33,15 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]PilotDTO pilot)
         {
-            return Json(pilotService.AddPilot(pilot));
+            try
+            {
+                return Json(pilotService.AddPilot(pilot));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 400;
+                return Json(ex.Message);
+            }
         }
         
         // PUT: api/Pilots/5

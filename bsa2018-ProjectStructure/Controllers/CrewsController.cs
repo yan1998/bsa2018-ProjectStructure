@@ -33,7 +33,15 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]CrewDTO value)
         {
-            return Json(crewService.AddCrew(value));
+            try
+            {
+                return Json(crewService.AddCrew(value));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 400;
+                return Json(ex.Message);
+            }
         }
         
         // PUT: api/Crews/5

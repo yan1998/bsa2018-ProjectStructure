@@ -33,7 +33,15 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]TicketDTO ticket)
         {
-            return Json(ticketService.AddTicket(ticket));
+            try
+            {
+                return Json(ticketService.AddTicket(ticket));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 400;
+                return Json(ex.Message);
+            }
         }
         
         // PUT: api/Tickets/5
