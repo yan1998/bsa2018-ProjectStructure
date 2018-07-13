@@ -1,5 +1,4 @@
 ﻿using bsa2018_ProjectStructure.DataAccess.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +13,11 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             this.context = context;
         }
 
-        public void Create(AircraftType entity)
+        public AircraftType Create(AircraftType entity)
         {
             entity.Id = context.AircraftTypes.Last().Id+1;
             context.AircraftTypes.Add(entity);
+            return entity;
         }
 
         public void Delete(int id)

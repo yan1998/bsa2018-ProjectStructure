@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using bsa2018_ProjectStructure.DataAccess.Model;
 
 namespace bsa2018_ProjectStructure.DataAccess.Interfaces
@@ -15,13 +13,14 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             this.context = context;
         }
 
-        public void Create(Ticket entity)
+        public Ticket Create(Ticket entity)
         {
             entity.Id = context.Tickets.Last().Id + 1;
             Flight flight = context.Flights.FirstOrDefault(f => f.Id == entity.IdFlight);
             flight.Tickets.Add(entity);
             entity.Flight = flight;
             context.Tickets.Add(entity);
+            return entity;
         }
 
         public void Delete(int id)

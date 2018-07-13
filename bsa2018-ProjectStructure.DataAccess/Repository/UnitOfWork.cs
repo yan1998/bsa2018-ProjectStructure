@@ -5,7 +5,7 @@ using bsa2018_ProjectStructure.DataAccess.Model;
 
 namespace bsa2018_ProjectStructure.DataAccess.Repository
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private DataContext context;
         private AircraftRepository aircraftRepository;

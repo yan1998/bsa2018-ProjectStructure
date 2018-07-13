@@ -1,8 +1,6 @@
 ﻿using bsa2018_ProjectStructure.DataAccess.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 {
@@ -15,10 +13,11 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             this.context = context;
         }
 
-        public void Create(Stewardess entity)
+        public Stewardess Create(Stewardess entity)
         {
             entity.Id = context.Stewardess.Last().Id + 1;
             context.Stewardess.Add(entity);
+            return entity;
         }
 
         public void Delete(int id)

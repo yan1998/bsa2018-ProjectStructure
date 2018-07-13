@@ -13,7 +13,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             this.context = context;
         }
 
-        public void Create(Departure entity)
+        public Departure Create(Departure entity)
         {
             entity.Id = context.Departures.Last().Id + 1;
             Flight flight = context.Flights.FirstOrDefault(f => f.Id == entity.IdFlight);
@@ -24,6 +24,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             entity.Aircraft = aircraft;
             entity.Crew = context.Crews.FirstOrDefault(c => c.Id == entity.IdCrew);
             context.Departures.Add(entity);
+            return entity;
         }
 
         public void Delete(int id)

@@ -11,7 +11,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 
         TEntity GetById(int id);
 
-        void Create(TEntity entity);
+        TEntity Create(TEntity entity);
 
         void Update(TEntity entity);
 
