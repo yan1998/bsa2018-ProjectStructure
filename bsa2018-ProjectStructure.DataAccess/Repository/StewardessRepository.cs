@@ -23,9 +23,9 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public void Delete(int id)
         {
             Stewardess stewardess = GetById(id);
-            var crews=context.Crews.Where(c => c.Stewardess.Contains(stewardess));
+            var crews=context.Crews.Where(c => c.idStewardess.Contains(stewardess.Id));
             foreach (var crew in crews)
-                crew.Stewardess.Remove(stewardess);
+                crew.idStewardess.Remove(stewardess.Id);
             context.Stewardess.Remove(stewardess);
         }
 

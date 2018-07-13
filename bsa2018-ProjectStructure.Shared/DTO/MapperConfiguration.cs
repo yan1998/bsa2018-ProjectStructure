@@ -19,8 +19,7 @@ namespace bsa2018_ProjectStructure.Shared.DTO
 
                 cfg.CreateMap<Crew, CrewDTO>();
                 cfg.CreateMap<CrewDTO, Crew>()
-                    .ForMember(c => c.Pilot, opt => opt.Ignore())
-                    .ForMember(c=>c.Stewardess,opt=>opt.Ignore());
+                    .ForMember(c => c.Pilot, opt => opt.Ignore());
 
                 cfg.CreateMap<Departure, DepartureDTO>()
                     .ForMember(d=>d.FlightNumber,opt=>opt.MapFrom(d=>d.IdFlight));
