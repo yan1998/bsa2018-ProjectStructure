@@ -35,6 +35,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public void Delete(int id)
         {
             Flight flight = GetById(id);
+            if (flight == null)
+                throw new System.Exception("Incorrect id");
             context.Tickets.RemoveAll(t=>t.IdFlight==flight.Id);
             context.Departures.RemoveAll(d => d.IdFlight == flight.Id);
             context.Flights.Remove(flight);
@@ -43,6 +45,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public Flight Update(int id, Flight entity)
         {
             Flight flight = GetById(id);
+            if (flight == null)
+                throw new System.Exception("Incorrect id");
             flight.ArrivalTime = entity.ArrivalTime;
             flight.DeparturePlace = entity.DeparturePlace;
             flight.DepartureTime = entity.DepartureTime;

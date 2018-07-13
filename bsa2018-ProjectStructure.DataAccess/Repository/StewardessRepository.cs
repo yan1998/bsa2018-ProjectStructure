@@ -23,6 +23,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public void Delete(int id)
         {
             Stewardess stewardess = GetById(id);
+            if (stewardess == null)
+                throw new System.Exception("Incorrect id");
             var crews=context.Crews.Where(c => c.idStewardess.Contains(stewardess.Id));
             foreach (var crew in crews)
                 crew.idStewardess.Remove(stewardess.Id);
@@ -42,6 +44,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public Stewardess Update(int id, Stewardess entity)
         {
             Stewardess stewardess = GetById(id);
+            if (stewardess == null)
+                throw new System.Exception("Incorrect id");
             stewardess.Birthday = entity.Birthday;
             stewardess.Name = entity.Name;
             stewardess.Surname = entity.Surname;

@@ -23,6 +23,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public void Delete(int id)
         {
             AircraftType aircraftType = GetById(id);
+            if (aircraftType == null)
+                throw new System.Exception("Incorrect id");
             foreach (var departure in aircraftType.Aircraft.Departures)
             {
                 departure.Flight.Departures.Remove(departure);
@@ -45,6 +47,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public AircraftType Update(int id, AircraftType entity)
         {
             AircraftType aircraftType = GetById(id);
+            if (aircraftType == null)
+                throw new System.Exception("Incorrect id");
             aircraftType.LoadCapacity = entity.LoadCapacity;
             aircraftType.Places = entity.Places;
             return aircraftType;

@@ -22,7 +22,10 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
 
         public void Delete(int id)
         {
-            context.Crews.Remove(GetById(id));
+            Crew crew = GetById(id);
+            if (crew == null)
+                throw new System.Exception("Incorrect id");
+            context.Crews.Remove(crew);
         }
 
         public IEnumerable<Crew> GetAll()
@@ -38,6 +41,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public Crew Update(int id, Crew entity)
         {
             Crew crew = GetById(id);
+            if (crew == null)
+                throw new System.Exception("Incorrect id");
             crew.IdPilot = entity.IdPilot;
             crew.Pilot = context.Pilots.FirstOrDefault(p => p.Id == entity.IdPilot);
             crew.idStewardess = entity.idStewardess;

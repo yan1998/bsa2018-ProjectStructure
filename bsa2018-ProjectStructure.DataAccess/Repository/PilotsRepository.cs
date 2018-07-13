@@ -23,6 +23,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public void Delete(int id)
         {
             Pilot pilot = GetById(id);
+            if (pilot == null)
+                throw new System.Exception("Incorrect id");
             var crews=context.Crews.Where(c => c.Pilot.Id == pilot.Id);
             foreach (var crew in crews)
             {
@@ -45,6 +47,8 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
         public Pilot Update(int id, Pilot entity)
         {
             Pilot pilot = GetById(id);
+            if (pilot == null)
+                throw new System.Exception("Incorrect id");
             pilot.Birthday = entity.Birthday;
             pilot.Experience = entity.Experience;
             pilot.Name = entity.Name;
