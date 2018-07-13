@@ -40,14 +40,29 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPut("{id}")]
         public JsonResult Put(int id, [FromBody]PilotDTO pilot)
         {
-            return Json(pilotService.UpdatePilot(id, pilot));
+            try
+            {
+                return Json(pilotService.UpdatePilot(id, pilot));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 404;
+                return Json(ex.Message);
+            }
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            pilotService.DeletePilot(id);
+            try
+            {
+                pilotService.DeletePilot(id);
+            }
+            catch (System.Exception)
+            {
+                HttpContext.Response.StatusCode = 404;
+            }
         }
     }
 }

@@ -40,14 +40,31 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPut("{id}")]
         public JsonResult Put(int id, [FromBody]AircraftTypeDTO aircraftType)
         {
-            return Json(aircraftTypesService.UpdateAircraftType(id,aircraftType));
+            try
+            {
+                return Json(aircraftTypesService.UpdateAircraftType(id, aircraftType));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 404;
+                return Json(ex.Message);
+            }
+
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            aircraftTypesService.DeleteAircraftType(id);
+            try
+            {
+                aircraftTypesService.DeleteAircraftType(id);
+            }
+            catch (System.Exception)
+            {
+                HttpContext.Response.StatusCode = 404;
+            }
+
         }
     }
 }

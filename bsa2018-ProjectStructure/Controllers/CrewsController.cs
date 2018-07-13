@@ -40,14 +40,29 @@ namespace bsa2018_ProjectStructure.Controllers
         [HttpPut("{id}")]
         public JsonResult Put(int id, [FromBody]CrewDTO crew)
         {
-            return Json(crewService.UpdateCrew(id,crew));
+            try
+            {
+                return Json(crewService.UpdateCrew(id, crew));
+            }
+            catch (System.Exception ex)
+            {
+                HttpContext.Response.StatusCode = 404;
+                return Json(ex.Message);
+            } 
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            crewService.DeleteCrew(id);
+            try
+            {
+                crewService.DeleteCrew(id);
+            }
+            catch (System.Exception)
+            {
+                HttpContext.Response.StatusCode = 404;
+            }
         }
     }
 }
