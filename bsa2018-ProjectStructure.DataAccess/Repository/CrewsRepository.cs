@@ -13,7 +13,7 @@ namespace bsa2018_ProjectStructure.DataAccess.Interfaces
             this.context = context;
         }
 
-        public Crew Crew(Crew entity)
+        public Crew Create(Crew entity)
         {
             entity.Id = context.Crews.Last().Id + 1;
             context.Crews.Add(entity);
