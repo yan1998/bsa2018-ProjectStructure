@@ -17,6 +17,7 @@ namespace bsa2018_ProjectStructure.Controllers
 
         // GET: api/Departures
         [HttpGet]
+        [HttpGet("{id}")]
         public JsonResult Get()
         {
             return Json(departureService.GetAllDepartures());

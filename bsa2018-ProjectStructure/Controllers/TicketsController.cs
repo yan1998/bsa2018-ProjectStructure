@@ -23,7 +23,7 @@ namespace bsa2018_ProjectStructure.Controllers
         }
 
         // GET: api/Tickets/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
             return Json(ticketService.GetTicket(id));

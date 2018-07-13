@@ -23,7 +23,7 @@ namespace bsa2018_ProjectStructure.Controllers
         }
 
         // GET: api/Aircrafts/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
             return Json(aircraftService.GetAircraft(id));
