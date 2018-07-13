@@ -27,7 +27,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeletePilot(int id)
         {
-            unitOfWork.Pilots.Delete(id);
+            try
+            {
+                unitOfWork.Pilots.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<PilotDTO> GetAllPilots()
@@ -44,9 +51,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public PilotDTO UpdatePilot(int id, PilotDTO pilot)
         {
-            Pilot modelPilot = mapper.Map<PilotDTO, Pilot>(pilot);
-            Pilot result = unitOfWork.Pilots.Update(id, modelPilot);
-            return mapper.Map<Pilot, PilotDTO>(result);
+            try
+            {
+                Pilot modelPilot = mapper.Map<PilotDTO, Pilot>(pilot);
+                Pilot result = unitOfWork.Pilots.Update(id, modelPilot);
+                return mapper.Map<Pilot, PilotDTO>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

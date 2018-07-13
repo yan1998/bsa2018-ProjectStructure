@@ -27,7 +27,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteTicket(int id)
         {
-            unitOfWork.Tickets.Delete(id);
+            try
+            {
+                unitOfWork.Tickets.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<TicketDTO> GetAllTickets()
@@ -44,9 +51,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public TicketDTO UpdateTicket(int id, TicketDTO ticket)
         {
-            Ticket modelTicket= mapper.Map<TicketDTO, Ticket>(ticket);
-            Ticket result = unitOfWork.Tickets.Update(id, modelTicket);
-            return mapper.Map<Ticket, TicketDTO>(result);
+            try
+            {
+                Ticket modelTicket = mapper.Map<TicketDTO, Ticket>(ticket);
+                Ticket result = unitOfWork.Tickets.Update(id, modelTicket);
+                return mapper.Map<Ticket, TicketDTO>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

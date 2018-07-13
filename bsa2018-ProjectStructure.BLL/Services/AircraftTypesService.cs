@@ -26,7 +26,15 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteAircraftType(int id)
         {
-            unitOfWork.AircraftTypes.Delete(id);
+            try
+            {
+                unitOfWork.AircraftTypes.Delete(id);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public AircraftTypeDTO GetAircraftType(int id)
@@ -43,9 +51,17 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public AircraftTypeDTO UpdateAircraftType(int id, AircraftTypeDTO aircraftType)
         {
-            AircraftType modelAircraftTypes = mapper.Map<AircraftTypeDTO, AircraftType>(aircraftType);
-            AircraftType result = unitOfWork.AircraftTypes.Update(id, modelAircraftTypes);
-            return mapper.Map<AircraftType, AircraftTypeDTO>(result);
+            try
+            {
+                AircraftType modelAircraftTypes = mapper.Map<AircraftTypeDTO, AircraftType>(aircraftType);
+                AircraftType result = unitOfWork.AircraftTypes.Update(id, modelAircraftTypes);
+                return mapper.Map<AircraftType, AircraftTypeDTO>(result);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

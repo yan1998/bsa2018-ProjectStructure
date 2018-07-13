@@ -26,7 +26,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteCrew(int id)
         {
-            unitOfWork.Crews.Delete(id);
+            try
+            {
+                unitOfWork.Crews.Delete(id);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<CrewDTO> GetAllCrews()
@@ -43,9 +50,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public CrewDTO UpdateCrew(int id, CrewDTO crew)
         {
-            Crew modelCrew = mapper.Map<CrewDTO, Crew>(crew);
-            Crew result = unitOfWork.Crews.Update(id, modelCrew);
-            return mapper.Map<Crew, CrewDTO>(result);
+            try
+            {
+                Crew modelCrew = mapper.Map<CrewDTO, Crew>(crew);
+                Crew result = unitOfWork.Crews.Update(id, modelCrew);
+                return mapper.Map<Crew, CrewDTO>(result);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

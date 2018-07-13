@@ -27,7 +27,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteStewardess(int id)
         {
-            unitOfWork.Stewardess.Delete(id);
+            try
+            {
+                unitOfWork.Stewardess.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<StewardessDTO> GetAllStewardess()
@@ -44,9 +51,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public StewardessDTO UpdateStewardess(int id, StewardessDTO stewardess)
         {
-            Stewardess modelStewardess = mapper.Map<StewardessDTO, Stewardess>(stewardess);
-            Stewardess result = unitOfWork.Stewardess.Update(id, modelStewardess);
-            return mapper.Map<Stewardess, StewardessDTO>(result);
+            try
+            {
+                Stewardess modelStewardess = mapper.Map<StewardessDTO, Stewardess>(stewardess);
+                Stewardess result = unitOfWork.Stewardess.Update(id, modelStewardess);
+                return mapper.Map<Stewardess, StewardessDTO>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            } 
         }
     }
 }

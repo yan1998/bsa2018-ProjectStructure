@@ -27,7 +27,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteDeparture(int id)
         {
-            unitOfWork.Departures.Delete(id);
+            try
+            {
+                unitOfWork.Departures.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<DepartureDTO> GetAllDepartures()
@@ -44,9 +51,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public DepartureDTO UpdateDeparture(int id, DepartureDTO departure)
         {
-            Departure modelDeparture = mapper.Map<DepartureDTO, Departure>(departure);
-            Departure result = unitOfWork.Departures.Update(id, modelDeparture);
-            return mapper.Map<Departure, DepartureDTO>(result);
+            try
+            {
+                Departure modelDeparture = mapper.Map<DepartureDTO, Departure>(departure);
+                Departure result = unitOfWork.Departures.Update(id, modelDeparture);
+                return mapper.Map<Departure, DepartureDTO>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

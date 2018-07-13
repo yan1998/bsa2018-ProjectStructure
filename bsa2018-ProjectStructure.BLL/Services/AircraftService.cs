@@ -26,7 +26,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteAircraft(int id)
         {
-            unitOfWork.Aircrafts.Delete(id);
+            try
+            {
+                unitOfWork.Aircrafts.Delete(id);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public AircraftDTO GetAircraft(int id)
@@ -43,9 +50,17 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public AircraftDTO UpdateAircraft(int id, AircraftDTO aircraft)
         {
-            Aircraft modelAircraft = mapper.Map<AircraftDTO, Aircraft>(aircraft);
-            Aircraft result = unitOfWork.Aircrafts.Update(id, modelAircraft);
-            return mapper.Map<Aircraft, AircraftDTO>(result);
+            try
+            {
+                Aircraft modelAircraft = mapper.Map<AircraftDTO, Aircraft>(aircraft);
+                Aircraft result = unitOfWork.Aircrafts.Update(id, modelAircraft);
+                return mapper.Map<Aircraft, AircraftDTO>(result);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

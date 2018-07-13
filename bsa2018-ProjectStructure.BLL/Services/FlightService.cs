@@ -27,7 +27,14 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public void DeleteFlight(int id)
         {
-            unitOfWork.Flights.Delete(id);
+            try
+            {
+                unitOfWork.Flights.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<FlightDTO> GetAllFlights()
@@ -44,9 +51,16 @@ namespace bsa2018_ProjectStructure.BLL.Services
 
         public FlightDTO UpdateFlight(int id,FlightDTO flight)
         {
-            Flight modelFlight = mapper.Map<FlightDTO, Flight>(flight);
-            Flight result=unitOfWork.Flights.Update(id, modelFlight);
-            return mapper.Map<Flight, FlightDTO>(result);
+            try
+            {
+                Flight modelFlight = mapper.Map<FlightDTO, Flight>(flight);
+                Flight result = unitOfWork.Flights.Update(id, modelFlight);
+                return mapper.Map<Flight, FlightDTO>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
